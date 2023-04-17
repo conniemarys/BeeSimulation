@@ -11,9 +11,18 @@ AHexGridManager::AHexGridManager(int width, int height)
 {
 	Width = width;
 	Height = height;
+	PopulateArray();
 }
 
-void AHexGridManager::TestPopulateArray()
+void AHexGridManager::PopulateArray()
 {
+	for (int x = 0; x < Width; x++)
+	{
+		HexCellArray.Add(FArray2DSimulator());
 
+		for (int y = 0; y < Height; y++)
+		{
+			HexCellArray[x].Add(FHexCell());
+		}
+	}
 }

@@ -3,14 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "HexGridManager.h"
 #include "HexCell.generated.h"
 
 /**
  * 
  */
-UCLASS()
-class BEESIMULATION_API AHexCell : public AHexGridManager
+USTRUCT(BlueprintType)
+struct FHexCell
 {
 	GENERATED_BODY()
 	
@@ -18,10 +17,11 @@ class BEESIMULATION_API AHexCell : public AHexGridManager
 
 public:
 
-	AHexCell();
-	AHexCell(int x, int y, int32 wallSides);
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int X;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int Y;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 WallSides;
+
 };

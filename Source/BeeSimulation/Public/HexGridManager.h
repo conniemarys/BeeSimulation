@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Array2DSimulater.h"
 #include "GameManager.h"
 #include "HexGridManager.generated.h"
 
@@ -23,9 +24,9 @@ public:
 	int Width;
 	int Height;
 
-	TArray<TArray<UObject*>> HexCellGrid;
+	TArray<FArray2DSimulator> HexCellArray;
 
 	AHexGridManager(int width, int height);
 
-	void TestPopulateArray();
+	void PopulateArray();
 };
