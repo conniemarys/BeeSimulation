@@ -5,13 +5,13 @@
 #include "CoreMinimal.h"
 #include "HexCell.h"
 #include "Engine/UserDefinedStruct.h"
-#include "Array2DSimulater.generated.h"
+#include "Cell2DArraySimulator.generated.h"
 
 /**
- * 
+ *
  */
 USTRUCT(BlueprintType)
-struct FArray2DSimulator
+struct FHexCell2DArraySimulator
 {
 	//BEESIMULATION_API
 	GENERATED_BODY()
@@ -19,7 +19,7 @@ struct FArray2DSimulator
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<FHexCell> Ar;
+		TArray<FHexCell> Ar;
 
 	FHexCell operator[](int32 i)
 	{
@@ -30,5 +30,5 @@ public:
 	{
 		Ar.Add(hexCell);
 	}
-	
+
 };

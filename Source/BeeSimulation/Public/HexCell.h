@@ -12,8 +12,6 @@ USTRUCT(BlueprintType)
 struct FHexCell
 {
 	GENERATED_BODY()
-	
-
 
 public:
 
@@ -25,6 +23,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int InstanceInt;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<int> WallInstances;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Bitmask, BitmaskEnum = "EWallSidesBits"))
 	int32 eWallSidesBits;

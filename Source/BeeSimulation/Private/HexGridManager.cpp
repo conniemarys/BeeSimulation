@@ -20,7 +20,7 @@ void AHexGridManager::PopulateArray(UStaticMesh* defaultMesh)
 
 	for (int x = 0; x < Width; x++)
 	{
-		HexCellArray.Add(FArray2DSimulator());
+		HexCellArray.Add(FHexCell2DArraySimulator());
 
 		for (int y = 0; y < Height; y++)
 		{
@@ -31,4 +31,14 @@ void AHexGridManager::PopulateArray(UStaticMesh* defaultMesh)
 			HexCellArray[x].Add(cellToAdd);
 		}
 	}
+}
+
+TArray<FTransform> AHexGridManager::GetWallLocations(FHexCell hexCell)
+{
+	TArray<FTransform> wallLocations = {};
+
+	int32 eWallSidesBits = hexCell.eWallSidesBits;
+
+
+	return wallLocations;
 }

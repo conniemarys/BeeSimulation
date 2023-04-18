@@ -3,8 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Array2DSimulater.h"
-#include "GameManager.h"
+#include "GameFramework/GameModeBase.h"
+#include "Cell2DArraySimulator.h"
+#include "Int2DArraySimulator.h"
 #include "HexGridManager.generated.h"
 
 /**
@@ -29,13 +30,19 @@ public:
 	int Height = 10;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<FArray2DSimulator> HexCellArray;
+	TArray<FHexCell2DArraySimulator> HexCellArray;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FInt2DArraySimulator> InstancesArray;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Radius;
 
 	UFUNCTION(BlueprintCallable)
 	void PopulateArray(UStaticMesh* defaultStaticMesh);
+
+	UFUNCTION(BlueprintCallable)
+	TArray<FTransform> GetWallLocations(FHexCell hexCell);
 };
 
 UENUM(BlueprintType, Meta = (Bitflags))
