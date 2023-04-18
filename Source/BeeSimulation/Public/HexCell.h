@@ -19,9 +19,18 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int X;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int Y;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int32 WallSides;
+	int InstanceInt;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Bitmask, BitmaskEnum = "EWallSidesBits"))
+	int32 eWallSidesBits;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UStaticMesh *StaticMesh;
+
 
 };

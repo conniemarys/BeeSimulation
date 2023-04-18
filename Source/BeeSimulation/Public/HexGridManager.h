@@ -10,8 +10,8 @@
 /**
  * 
  */
-UCLASS()
-class BEESIMULATION_API AHexGridManager : public AGameManager
+UCLASS(BlueprintType)
+class BEESIMULATION_API AHexGridManager : public AGameModeBase
 {
 	GENERATED_BODY()
 
@@ -21,12 +21,31 @@ protected:
 	
 public:
 
-	int Width;
-	int Height;
-
-	TArray<FArray2DSimulator> HexCellArray;
-
 	AHexGridManager(int width, int height);
 
-	void PopulateArray();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int Width = 10;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int Height = 10;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FArray2DSimulator> HexCellArray;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float Radius;
+
+	UFUNCTION(BlueprintCallable)
+	void PopulateArray(UStaticMesh* defaultStaticMesh);
+};
+
+UENUM(BlueprintType, Meta = (Bitflags))
+enum class EWallSidesBits : uint8
+{
+	EWB_None = 0x00,
+	EWB_East = 0x01,
+	EWB_SouthEast = 0x02,
+	EWB_SouthWest = 0x04,
+	EWB_West = 0x08,
+	EWB_NorthWest = 0x16,
+	EWB_NorthEast = 0x32
 };

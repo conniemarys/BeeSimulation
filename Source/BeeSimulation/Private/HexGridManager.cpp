@@ -11,18 +11,24 @@ AHexGridManager::AHexGridManager(int width, int height)
 {
 	Width = width;
 	Height = height;
-	PopulateArray();
 }
 
-void AHexGridManager::PopulateArray()
+UFUNCTION(BlueprintCallable)
+void AHexGridManager::PopulateArray(UStaticMesh* defaultMesh)
 {
+	Radius = defaultMesh->GetBoundingBox().Max.X;
+
 	for (int x = 0; x < Width; x++)
 	{
 		HexCellArray.Add(FArray2DSimulator());
 
 		for (int y = 0; y < Height; y++)
 		{
-			HexCellArray[x].Add(FHexCell());
+			FHexCell cellToAdd = FHexCell();
+			cellToAdd.StaticMesh = defaultMesh;
+			cellToAdd.X = x;
+			cellToAdd.Y = y;
+			HexCellArray[x].Add(cellToAdd);
 		}
 	}
 }
