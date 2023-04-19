@@ -37,22 +37,26 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Radius;
-
+	
 	UFUNCTION(BlueprintCallable)
 	void PopulateArray(UStaticMesh* defaultStaticMesh);
 
 	UFUNCTION(BlueprintCallable)
-	TArray<FTransform> GetWallLocations(FHexCell hexCell);
+	bool HasFlag(UPARAM(meta = (Bitmask, BitmaskEnum = EWallSidesBits)) int32 flagToCheck, int32 valueToCheck);
+
+	UFUNCTION(BlueprintCallable)
+	TArray<FTransform> GetWallTransforms(int32 valueToCheck, FTransform cellTransform);
 };
 
-UENUM(BlueprintType, Meta = (Bitflags))
+UENUM(BlueprintType, Meta = (Bitflags, UseEnumValuesAsMaskValuesInEditor = "true"))
 enum class EWallSidesBits : uint8
 {
-	EWB_None = 0x00,
-	EWB_East = 0x01,
-	EWB_SouthEast = 0x02,
-	EWB_SouthWest = 0x04,
-	EWB_West = 0x08,
-	EWB_NorthWest = 0x16,
-	EWB_NorthEast = 0x32
+	EWB_None = 0x00 UMETA(Hidden),
+	EWB_East = 1 << 0, //0x01,
+	EWB_SouthEast = 1 << 1, //0x02,
+	EWB_SouthWest = 1 << 2, //0x04,
+	EWB_West = 1 << 3, //0x08,
+	EWB_NorthWest = 1 << 4,//0x16,
+	EWB_NorthEast = 1 << 5//0x32
 };
+ENUM_CLASS_FLAGS(EWallSidesBits)
