@@ -45,7 +45,17 @@ public:
 	bool HasFlag(UPARAM(meta = (Bitmask, BitmaskEnum = EWallSidesBits)) int32 flagToCheck, int32 valueToCheck);
 
 	UFUNCTION(BlueprintCallable)
-	TArray<FTransform> GetWallTransforms(int32 valueToCheck, FTransform cellTransform);
+	void SetFlagOnHexCell(UPARAM(meta = (Bitmask, BitmaskEnum = EWallSidesBits)) int32 flagToSet, FHexCell hexCell);
+
+	UFUNCTION(BlueprintCallable)
+	void SetFlag(UPARAM(meta = (Bitmask, BitmaskEnum = EWallSidesBits)) int32 flagToSet, int32 valueToAddTo);
+
+	UFUNCTION(BlueprintCallable)
+	void RemoveFlagOnHexCell(UPARAM(meta = (Bitmask, BitmaskEnum = EWallSidesBits)) int32 flagToRemove, FHexCell hexCell);
+
+	UFUNCTION(BlueprintCallable)
+	void RemoveFlag(UPARAM(meta = (Bitmask, BitmaskEnum = EWallSidesBits)) int32 flagToRemove, int32 valueToRemoveFrom);
+
 };
 
 UENUM(BlueprintType, Meta = (Bitflags, UseEnumValuesAsMaskValuesInEditor = "true"))

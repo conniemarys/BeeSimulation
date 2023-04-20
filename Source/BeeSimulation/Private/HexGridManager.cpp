@@ -48,49 +48,25 @@ bool AHexGridManager::HasFlag(int32 flagToCheck, int32 valueToCheck)
 }
 
 UFUNCTION(BlueprintCallable)
-TArray<FTransform> AHexGridManager::GetWallTransforms(int32 valueToCheck, FTransform cellTransform)
+void AHexGridManager::SetFlagOnHexCell(int32 flagToSet, FHexCell hexCell)
 {
-	TArray<FTransform> wallLocations = {};
-	FVector cellLocation = cellTransform.GetLocation();
-	FQuat cellRotation = cellTransform.GetRotation();
-	FVector cellScale = cellTransform.GetScale3D();
-	
+	hexCell.eWallSidesBits |= flagToSet;
+}
 
-	if ((valueToCheck & (int)EWallSidesBits::EWB_East) == (int)EWallSidesBits::EWB_East)
-	{
-		FVector wallLocation = cellLocation + FVector(-60, 0, 0);
-		wallLocations.Add(FTransform(cellRotation, wallLocation, cellScale));
-	};
-	if ((valueToCheck & (int)EWallSidesBits::EWB_SouthEast) == (int)EWallSidesBits::EWB_SouthEast)
-	{
-		FVector wallLocation = cellLocation + FVector(-30, -52, 0);
-		FQuat wallRotation = cellRotation + FQuat(0, 0, 60, 1);
-		wallLocations.Add(FTransform(wallRotation, wallLocation, cellScale));
-	};
-	if ((valueToCheck & (int)EWallSidesBits::EWB_SouthWest) == (int)EWallSidesBits::EWB_SouthWest)
-	{
-		FVector wallLocation = cellLocation + FVector(30, -52, 0);
-		FQuat wallRotation = cellRotation + FQuat(0, 0, 120, 1);
-		wallLocations.Add(FTransform(wallRotation, wallLocation, cellScale));
-	};
-	if ((valueToCheck & (int)EWallSidesBits::EWB_West) == (int)EWallSidesBits::EWB_West)
-	{
-		FVector wallLocation = cellLocation + FVector(60, 0, 0);
-		FQuat wallRotation = cellRotation + FQuat(0, 0, 180, 1);
-		wallLocations.Add(FTransform(wallRotation, wallLocation, cellScale));
-	};
-	if ((valueToCheck & (int)EWallSidesBits::EWB_NorthWest) == (int)EWallSidesBits::EWB_NorthWest)
-	{
-		FVector wallLocation = cellLocation + FVector(30, 52, 0);
-		FQuat wallRotation = cellRotation + FQuat(0, 0, -120, 1);
-		wallLocations.Add(FTransform(wallRotation, wallLocation, cellScale));
-	};
-	if ((valueToCheck & (int)EWallSidesBits::EWB_NorthEast) == (int)EWallSidesBits::EWB_NorthEast)
-	{
-		FVector wallLocation = cellLocation + FVector(-30, 52, 0);
-		FQuat wallRotation = FQuat(0, 0, -60, 1);
-		wallLocations.Add(FTransform(wallRotation, wallLocation, cellScale));
-	};
+UFUNCTION(BlueprintCallable)
+void AHexGridManager::SetFlag(int32 flagToSet, int32 valueToAddTo)
+{
+	valueToAddTo |= flagToSet;
+}
 
-	return wallLocations;
+UFUNCTION(BlueprintCallable)
+void AHexGridManager::RemoveFlagOnHexCell(int32 flagToRemove, FHexCell hexCell)
+{
+	hexCell.eWallSidesBits &= flagToRemove;
+}
+
+UFUNCTION(BlueprintCallable)
+void AHexGridManager::RemoveFlag(int32 flagToRemove, int32 valueToRemoveFrom)
+{
+	valueToRemoveFrom &= flagToRemove;
 }
