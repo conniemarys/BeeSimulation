@@ -21,6 +21,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int Y;
 
+	float FCost;
+
+	float GCost;
+
+	float HCost;
+
+	int parentX;
+
+	int parentY;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int InstanceInt;
 

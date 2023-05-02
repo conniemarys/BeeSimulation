@@ -24,8 +24,14 @@ public:
 
 	AHexGridManager(int width, int height);
 
+	#ifndef HexGridManager
+	#define HexGridManager
+		bool ScriptHasFlag(int32 flagToCheck, int32 valueToCheck);
+	#endif
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int Width = 10;
+	int Width = 20;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int Height = 10;
 

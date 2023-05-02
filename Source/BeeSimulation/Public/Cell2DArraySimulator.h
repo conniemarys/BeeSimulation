@@ -31,4 +31,8 @@ public:
 		Ar.Add(hexCell);
 	}
 
+	int Num()
+	{
+		return Ar.Num();
+	}
 };

@@ -29,11 +29,6 @@ void AHexGridManager::PopulateArray(UStaticMesh* defaultMesh)
 			cellToAdd.X = x;
 			cellToAdd.Y = y;
 			cellToAdd.eWallSidesBits |= (int)EWallSidesBits::EWB_East;
-			cellToAdd.eWallSidesBits |= (int)EWallSidesBits::EWB_West;
-			cellToAdd.eWallSidesBits |= (int)EWallSidesBits::EWB_NorthWest;
-			cellToAdd.eWallSidesBits |= (int)EWallSidesBits::EWB_NorthEast;
-			cellToAdd.eWallSidesBits |= (int)EWallSidesBits::EWB_SouthWest;
-			cellToAdd.eWallSidesBits |= (int)EWallSidesBits::EWB_SouthEast;
 
 			HexCellArray[x].Add(cellToAdd);
 		}
@@ -45,6 +40,11 @@ bool AHexGridManager::HasFlag(int32 flagToCheck, int32 valueToCheck)
 {
 	return (valueToCheck & flagToCheck) == flagToCheck;
 
+}
+
+bool AHexGridManager::ScriptHasFlag(int32 flagToCheck, int32 valueToCheck)
+{
+	return (valueToCheck & flagToCheck) == flagToCheck;
 }
 
 UFUNCTION(BlueprintCallable)
@@ -70,3 +70,4 @@ void AHexGridManager::RemoveFlag(int32 flagToRemove, int32 valueToRemoveFrom)
 {
 	valueToRemoveFrom &= flagToRemove;
 }
+
