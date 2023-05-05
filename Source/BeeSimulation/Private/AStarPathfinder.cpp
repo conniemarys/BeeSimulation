@@ -20,7 +20,6 @@ TArray<FHexCell> UAStarPathfinder::PathFind(TArray<FHexCell2DArraySimulator> inp
 	grid[startNode.X][startNode.Y] = startNode;
 	TArray<FHexCell> openList = { startNode };
 	TArray<FHexCell> closedList;
-	//UE_LOG(logTemp, Warning, TEXT("I just started running"));
 
 	return RecursiveCall(openList, closedList, grid, endNode);
 
@@ -64,7 +63,8 @@ TArray<FHexCell> UAStarPathfinder::RecursiveCall(TArray<FHexCell> openList, TArr
 				{
 					if (openList[ListFind(openList, neighbourNode)].GCost > neighbourNode.GCost)
 					{
-						openList[ListFind(openList, neighbourNode)] = neighbourNode;
+						openList.RemoveAt(ListFind(openList, neighbourNode));
+						openList.Add(neighbourNode);
 					}
 				}
 				else
@@ -193,62 +193,62 @@ TArray<FHexCell> UAStarPathfinder::FindNeighbours(TArray<FHexCell2DArraySimulato
 	TArray<FHexCell> neighbours;
 
 
-	if (yLocation % 2 == 0)
+	if (xLocation % 2 == 0)
 	{
 		//NorthEast
-		if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_NorthEast) != (int)EWallSidesBits::EWB_NorthEast && yLocation != grid[0].Num() - 1)
-		{
-			neighbours.Add(grid[xLocation][yLocation + 1]);
-		}
-		//SouthEast
-		if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_SouthEast) != (int)EWallSidesBits::EWB_SouthEast && yLocation != 0)
-		{
-			neighbours.Add(grid[xLocation][yLocation - 1]);
-		}
-		//SouthWest
-		if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_SouthWest) != (int)EWallSidesBits::EWB_SouthWest && yLocation != 0 && xLocation != grid.Num() - 1)
-		{
-			neighbours.Add(grid[xLocation + 1][yLocation - 1]);
-		}
-		//NorthWest
-		if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_NorthWest) != (int)EWallSidesBits::EWB_NorthWest && yLocation != grid[0].Num() - 1 && xLocation != grid.Num() - 1)
+		if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_NorthEast) != (int)EWallSidesBits::EWB_NorthEast && xLocation != grid.Num() - 1 && yLocation != grid[0].Num() - 1)
 		{
 			neighbours.Add(grid[xLocation + 1][yLocation + 1]);
+		}
+		//SouthEast
+		if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_SouthEast) != (int)EWallSidesBits::EWB_SouthEast && xLocation != grid.Num() - 1)
+		{
+			neighbours.Add(grid[xLocation + 1][yLocation]);
+		}
+		//SouthWest
+		if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_SouthWest) != (int)EWallSidesBits::EWB_SouthWest && xLocation != 0)
+		{
+			neighbours.Add(grid[xLocation - 1][yLocation]);
+		}
+		//NorthWest
+		if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_NorthWest) != (int)EWallSidesBits::EWB_NorthWest && yLocation != grid[0].Num() - 1 && xLocation != 0)
+		{
+			neighbours.Add(grid[xLocation - 1][yLocation + 1]);
 		}
 	}
 	else
 	{
 		//NorthEast
-		if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_NorthEast) != (int)EWallSidesBits::EWB_NorthEast && yLocation != grid[0].Num() - 1 && xLocation != 0)
+		if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_NorthEast) != (int)EWallSidesBits::EWB_NorthEast && xLocation != grid.Num() - 1)
 		{
-			neighbours.Add(grid[xLocation - 1][yLocation + 1]);
+			neighbours.Add(grid[xLocation + 1][yLocation]);
 		}
 		//SouthEast
-		if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_SouthEast) != (int)EWallSidesBits::EWB_SouthEast && yLocation != 0 && xLocation != 0)
+		if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_SouthEast) != (int)EWallSidesBits::EWB_SouthEast && yLocation != 0 && xLocation != grid.Num() - 1)
+		{
+			neighbours.Add(grid[xLocation + 1][yLocation - 1]);
+		}
+		//SouthWest
+		if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_SouthWest) != (int)EWallSidesBits::EWB_SouthWest && yLocation != 0 && xLocation != 0)
 		{
 			neighbours.Add(grid[xLocation - 1][yLocation - 1]);
 		}
-		//SouthWest
-		if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_SouthWest) != (int)EWallSidesBits::EWB_SouthWest && yLocation != 0)
-		{
-			neighbours.Add(grid[xLocation][yLocation - 1]);
-		}
 		//NorthWest
-		if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_NorthWest) != (int)EWallSidesBits::EWB_NorthWest && yLocation != grid[0].Num() - 1)
+		if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_NorthWest) != (int)EWallSidesBits::EWB_NorthWest && xLocation != 0)
 		{
-			neighbours.Add(grid[xLocation][yLocation + 1]);
+			neighbours.Add(grid[xLocation - 1][yLocation]);
 		}
 	}
 
 	//West
-	if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_West) != (int)EWallSidesBits::EWB_West && xLocation != 0)
+	if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_South) != (int)EWallSidesBits::EWB_South && yLocation != 0)
 	{
-		neighbours.Add(grid[xLocation - 1][yLocation]);
+		neighbours.Add(grid[xLocation][yLocation - 1]);
 	}
 	//East
-	if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_East) != (int)EWallSidesBits::EWB_East && xLocation != grid.Num() - 1)
+	if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_North) != (int)EWallSidesBits::EWB_North && yLocation != grid[0].Num() - 1)
 	{
-		neighbours.Add(grid[xLocation + 1][yLocation]);
+		neighbours.Add(grid[xLocation][yLocation + 1]);
 	}
 
 	return neighbours;

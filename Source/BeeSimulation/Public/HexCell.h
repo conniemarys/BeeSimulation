@@ -32,6 +32,9 @@ public:
 	int parentY;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FTransform cellTransform;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int InstanceInt;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

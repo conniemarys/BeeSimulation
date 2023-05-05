@@ -68,11 +68,11 @@ UENUM(BlueprintType, Meta = (Bitflags, UseEnumValuesAsMaskValuesInEditor = "true
 enum class EWallSidesBits : uint8
 {
 	EWB_None = 0x00 UMETA(Hidden),
-	EWB_East = 1 << 0, //0x01,
-	EWB_SouthEast = 1 << 1, //0x02,
-	EWB_SouthWest = 1 << 2, //0x04,
-	EWB_West = 1 << 3, //0x08,
-	EWB_NorthWest = 1 << 4,//0x16,
-	EWB_NorthEast = 1 << 5//0x32
+	EWB_South = 1 << 0, //0x01,
+	EWB_SouthWest = 1 << 1, //0x02,
+	EWB_NorthWest = 1 << 2, //0x04,
+	EWB_North = 1 << 3, //0x08,
+	EWB_NorthEast = 1 << 4,//0x16,
+	EWB_SouthEast = 1 << 5//0x32
 };
 ENUM_CLASS_FLAGS(EWallSidesBits)

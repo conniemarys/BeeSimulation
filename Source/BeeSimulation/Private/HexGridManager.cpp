@@ -28,7 +28,8 @@ void AHexGridManager::PopulateArray(UStaticMesh* defaultMesh)
 			cellToAdd.StaticMesh = defaultMesh;
 			cellToAdd.X = x;
 			cellToAdd.Y = y;
-			cellToAdd.eWallSidesBits |= (int)EWallSidesBits::EWB_East;
+			cellToAdd.eWallSidesBits |= (int)EWallSidesBits::EWB_North;
+			cellToAdd.eWallSidesBits |= (int)EWallSidesBits::EWB_South;
 
 			HexCellArray[x].Add(cellToAdd);
 		}
