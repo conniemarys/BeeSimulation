@@ -239,12 +239,12 @@ TArray<FHexCell> UAStarPathfinder::FindNeighbours(TArray<FHexCell2DArraySimulato
 		}
 	}
 
-	//West
+	//South
 	if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_South) != (int)EWallSidesBits::EWB_South && yLocation != 0)
 	{
 		neighbours.Add(grid[xLocation][yLocation - 1]);
 	}
-	//East
+	//North
 	if ((hexCell.eWallSidesBits & (int)EWallSidesBits::EWB_North) != (int)EWallSidesBits::EWB_North && yLocation != grid[0].Num() - 1)
 	{
 		neighbours.Add(grid[xLocation][yLocation + 1]);

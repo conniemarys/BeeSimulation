@@ -19,11 +19,17 @@ struct FHexCell2DArraySimulator
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		TArray<FHexCell> Ar;
+	TArray<FHexCell> Ar;
+
 
 	FHexCell operator[](int32 i)
 	{
 		return Ar[i];
+	}
+
+	void SetCellAtIndex(FHexCell hexCell, int i)
+	{
+		Ar[i] = hexCell;
 	}
 
 	void Add(FHexCell hexCell)
