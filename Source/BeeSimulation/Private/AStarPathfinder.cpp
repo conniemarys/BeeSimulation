@@ -192,7 +192,6 @@ TArray<FHexCell> UAStarPathfinder::FindNeighbours(TArray<FHexCell2DArraySimulato
 	int yLocation = hexCell.Y;
 	TArray<FHexCell> neighbours;
 
-
 	if (xLocation % 2 == 0)
 	{
 		//NorthEast

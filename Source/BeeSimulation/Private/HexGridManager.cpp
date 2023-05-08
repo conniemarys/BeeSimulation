@@ -28,6 +28,14 @@ void AHexGridManager::PopulateArray(UStaticMesh* defaultMesh)
 			cellToAdd.StaticMesh = defaultMesh;
 			cellToAdd.X = x;
 			cellToAdd.Y = y;
+			if (x % 2 == 0)
+			{
+				cellToAdd.eWallSidesBits |= (int)EWallSidesBits::EWB_SouthWest;
+			}
+			else
+			{
+				cellToAdd.eWallSidesBits |= (int)EWallSidesBits::EWB_NorthEast;
+			}
 			cellToAdd.eWallSidesBits |= (int)EWallSidesBits::EWB_North;
 			cellToAdd.eWallSidesBits |= (int)EWallSidesBits::EWB_South;
 
